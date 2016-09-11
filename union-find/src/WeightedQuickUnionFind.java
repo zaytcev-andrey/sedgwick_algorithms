@@ -35,19 +35,43 @@ public class WeightedQuickUnionFind {
 	
 	public int find( int p )
 	{
+		while( p != id_[ p ] )			
+		{
+			p = id_[ p ];
+		}
 		
+		return p;
 	}
 	
 	public void union( int p, int q )
 	{
+		int i = find( p );
+		int j = find( q );
 		
+		if ( i == j )
+		{
+			return;
+		}
+		
+		if ( sz_[ i ] < sz_[ j ] )
+		{
+			id_[ i ] = j;
+			sz_[ j ] += sz_[ i ];
+		}
+		else
+		{
+			id_[ j ] = i;
+			sz_[ i ] += sz_[ j ];
+		}
+		
+		--count_;
 	}
 	
 	public static void main(String[] args) 
 	{		
 		int N = StdIn.readInt();
 		
-		WeightedQuickUnionFind uf = new WeightedQuickUnionFind( 1 );
+		WeightedQuickUnionFind uf = new WeightedQuickUnionFind( N );
 		
 		while( !StdIn.isEmpty() )
 		{
