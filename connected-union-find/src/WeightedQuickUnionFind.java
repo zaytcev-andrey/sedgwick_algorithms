@@ -1,6 +1,7 @@
 
 import java.util.Arrays;
 
+import edu.princeton.cs.algs4.Count;
 import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.StdRandom;
@@ -78,13 +79,22 @@ public class WeightedQuickUnionFind {
 			int p = StdIn.readInt();
 			int q = StdIn.readInt();
 			
+			String date = StdIn.readString();
+			String time = StdIn.readString();
+			
 			if ( uf.connected( p, q ) )
 			{
 				continue;
 			}
 			
-			uf.union( p, q );
+			uf.union( p, q );			
 			StdOut.print( p + " " + q );
+			
+			if ( uf.count() == 1 )
+			{
+				StdOut.println( "all node connected: " + date + " " + time );
+				break;
+			}
 		}
 		
 		StdOut.println( uf.count() + " components" );
